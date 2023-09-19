@@ -438,7 +438,12 @@ defmodule ImportVisit do
                   end
                 end)
 
-                IO.inspect filtered_list
+#                IO.inspect filtered_list
+                visit_ts_str = Enum.join(filtered_list)
+#                IO.inspect(visit_ts_str)
+                {:ok, visit_ts}=Timex.parse(visit_ts_str, "{ASN1:GeneralizedTime}")
+                IO.inspect(visit_ts)
+                visit_ts
               end)
               IO.inspect("下一个")
 
@@ -486,23 +491,23 @@ defmodule ImportVisit do
             "lon" => 99999
           }
 
-          args =
-            Enum.reduce(
-              args,
-              %{},
-              fn {key, value}, acc ->
-                if value != nil do
-                  Map.put(acc, key, value)
-                else
-                  acc
-                end
-              end
-            )
-#          IO.inspect(visit_ts)
-          Enum.each(visit_ts, fn item  ->
-            args=Map.put(args,"visit_ts",item )
-            #              {_, co} =  Connection.insert_visit_wjtz(pid, args)
-          end)
+#          args =
+#            Enum.reduce(
+#              args,
+#              %{},
+#              fn {key, value}, acc ->
+#                if value != nil do
+#                  Map.put(acc, key, value)
+#                else
+#                  acc
+#                end
+#              end
+#            )
+##          IO.inspect(visit_ts)
+#          Enum.each(visit_ts, fn item  ->
+#            args=Map.put(args,"visit_ts",item )
+#            #              {_, co} =  Connection.insert_visit_wjtz(pid, args)
+#          end)
 
 
         end
